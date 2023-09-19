@@ -92,7 +92,7 @@ export default function Home() {
   return (
     <Container>
       <Title>Pokemon Search</Title>
-      <input
+      <Input
         className={styles.search}
         value={filter}
         onChange={(event) => filterSet(event.target.value)}
