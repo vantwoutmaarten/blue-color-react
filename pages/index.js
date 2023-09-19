@@ -1,7 +1,26 @@
 import Head from "next/head";
 import Image from "next/image";
+
+import PropTypes from "prop-types";
+
 import styles from "../styles/Home.module.css";
 import pokemon from "./pokemon.json";
+
+const PokemonRow = ({ pokemon }) => (
+  <tr key={pokemon.id}>
+    <td>{pokemon.name.english}</td>
+    <td>{pokemon.type.join(", ")}</td>
+  </tr>
+);
+
+PokemonRow.propTypes = {
+  pokemon: PropTypes.shape({
+    name: PropTypes.shape({
+      english: PropTypes.string,
+    }),
+    type: PropTypes.arrayOf(PropTypes.string),
+  }),
+};
 
 export default function Home() {
   return (
@@ -22,15 +41,8 @@ export default function Home() {
         </thead>
         <tbody>
           {pokemon.slice(0, 20).map((pokemon) => (
-            <tr key={pokemon.id}>
-              <td>{pokemon.name.english}</td>
-              <td>{pokemon.type.join(", ")}</td>
-            </tr>
+            <PokemonRow pokemon={pokemon} key={pokemon.id} />
           ))}
-          <tr>
-            <td>Bulbasaur</td>
-            <td>Grass, Poison</td>
-          </tr>
         </tbody>
       </table>
     </div>
