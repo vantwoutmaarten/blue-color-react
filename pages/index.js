@@ -81,13 +81,18 @@ export default function Home() {
   const [selectedItem, selectedItemSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState([]);
 
+  const isGithubActions = process.env.GITHUB_ACTIONS || false;
+  const url = isGithubActions
+    ? "https://vantwoutmaarten.github.io/blue-color-react/pokemon.json"
+    : "http://localhost:3000/blue-color-react/pokemon.json";
+
   React.useEffect(() => {
-    fetch("http://localhost:3000/blue-color-react/pokemon.json")
+    fetch(url)
       .then((resp) => resp.json())
       .then((data) => {
         pokemonSet(data);
       });
-  }, []);
+  }, [url]);
 
   return (
     <Container>
