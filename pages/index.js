@@ -81,8 +81,9 @@ export default function Home() {
   const [selectedItem, selectedItemSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState([]);
 
-  const isGithubActions = process.env.GITHUB_ACTIONS || false;
-  const url = isGithubActions
+  const isGithubPages =
+    window.location.hostname === "vantwoutmaarten.github.io";
+  const url = isGithubPages
     ? "https://vantwoutmaarten.github.io/blue-color-react/pokemon.json"
     : "http://localhost:3000/blue-color-react/pokemon.json";
 
