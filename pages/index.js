@@ -5,7 +5,6 @@ import Image from "next/image";
 import PropTypes from "prop-types";
 
 import styles from "../styles/Home.module.css";
-import pokemon from "./pokemon.json";
 
 const PokemonRow = ({ pokemon, onSelect }) => (
   <tr key={pokemon.id}>
@@ -56,6 +55,15 @@ PokemonInfo.propTypes = {
 export default function Home() {
   const [filter, filterSet] = React.useState("");
   const [selectedItem, selectedItemSet] = React.useState("");
+  const [pokemon, pokemonSet] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("http://localhost:3000/blue-color-react/pokemon.json")
+      .then((resp) => resp.json())
+      .then((data) => {
+        pokemonSet(data);
+      });
+  }, []);
 
   return (
     <div
