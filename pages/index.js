@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import pokemon from "./pokemon.json";
 
 export default function Home() {
   return (
@@ -20,6 +21,12 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
+          {pokemon.slice(0, 20).map((pokemon) => (
+            <tr key={pokemon.id}>
+              <td>{pokemon.name.english}</td>
+              <td>{pokemon.type.join(", ")}</td>
+            </tr>
+          ))}
           <tr>
             <td>Bulbasaur</td>
             <td>Grass, Poison</td>
