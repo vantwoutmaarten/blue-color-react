@@ -1,6 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import { Button } from "@mui/material";
 
 import PropTypes from "prop-types";
 
@@ -12,7 +18,13 @@ const PokemonRow = ({ pokemon, onSelect }) => (
   <tr key={pokemon.id}>
     <td>{pokemon.name.english}</td>
     <td>{pokemon.type.join(", ")}</td>
-    <button onClick={() => onSelect(pokemon)}>Select!</button>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => onSelect(pokemon)}
+    >
+      Select!
+    </Button>
   </tr>
 );
 
