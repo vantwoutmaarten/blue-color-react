@@ -17,7 +17,7 @@ const PokemonTable = () => {
       </thead>
       <tbody>
         {pokemon
-          .filter((pokemon) =>
+          ?.filter((pokemon) =>
             pokemon.name.english.toLowerCase().includes(filter.toLowerCase())
           )
           .slice(0, 20)

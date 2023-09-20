@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
 const PokemonRow = ({ pokemon, onSelect }) => (
-  <tr key={pokemon.id}>
-    <td>{pokemon.name.english}</td>
-    <td>{pokemon.type.join(", ")}</td>
+  <tr key={pokemon?.id}>
+    <td>{pokemon?.name?.english}</td>
+    <td>{pokemon?.type.join(", ")}</td>
     <Button
       variant="contained"
       color="primary"
