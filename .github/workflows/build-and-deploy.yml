@@ -16,6 +16,12 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - name: Source .env file
+        run: |
+          set -a
+          . ./.env
+          set +a
+          
       - name: Build
         run: |
           yarn install --frozen-lockfile
