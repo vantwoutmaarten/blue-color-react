@@ -81,11 +81,9 @@ export default function Home() {
   const [selectedItem, selectedItemSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState([]);
 
-  const isGithubPages =
-    window.location.hostname === "vantwoutmaarten.github.io";
-  const url = isGithubPages
-    ? "https://vantwoutmaarten.github.io/blue-color-react/pokemon.json"
-    : "http://localhost:3000/blue-color-react/pokemon.json";
+  const url =
+    process.env.NEXT_PUBLIC_URL_POKEMON ||
+    "http://localhost:3000/blue-color-react/pokemon.json";
 
   React.useEffect(() => {
     fetch(url)
