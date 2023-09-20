@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import PokemonContext from "../PokemonContext";
+import PokemonContext from "../../contexts/PokemonContext";
 
 const PokemonInfo = () => {
   const { selectedPokemon } = useContext(PokemonContext);

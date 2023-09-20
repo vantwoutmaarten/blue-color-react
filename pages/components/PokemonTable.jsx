@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import PokemonRow from "./PokemonRow";
 
 import styles from "../../styles/Home.module.css";
-import PokemonContext from "../PokemonContext";
+import PokemonContext from "../../contexts/PokemonContext";
 
 const PokemonTable = () => {
   const { pokemon, filter, selectedPokemonSet } = useContext(PokemonContext);

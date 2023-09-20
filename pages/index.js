@@ -16,7 +16,7 @@ import PokemonInfo from "./components/PokemonInfo";
 import PokemonFilter from "./components/PokemonFilter";
 import PokemonTable from "./components/PokemonTable";
 
-import PokemonContext from "./PokemonContext";
+import PokemonContext from "../contexts/PokemonContext";
 
 const Title = styled.h1`
   text-align: center;
@@ -47,7 +47,6 @@ export default function Home() {
     fetch(url)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log("data", data);
         pokemonSet(data);
       });
   }, [url]);

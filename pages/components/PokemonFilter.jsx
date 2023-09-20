@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 
 import styles from "../../styles/Home.module.css";
-import PokemonContext from "../PokemonContext";
+import PokemonContext from "../../contexts/PokemonContext";
 
 const Input = styled.input`
   width: 100%;
