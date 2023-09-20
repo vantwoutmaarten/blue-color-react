@@ -12,7 +12,6 @@ import styles from "../styles/Home.module.css";
 
 import styled from "@emotion/styled";
 
-import PokemonRow from "./components/PokemonRow";
 import PokemonInfo from "./components/PokemonInfo";
 import PokemonFilter from "./components/PokemonFilter";
 import PokemonTable from "./components/PokemonTable";
@@ -37,8 +36,8 @@ const Container = styled.div`
 
 export default function Home() {
   const [filter, filterSet] = React.useState("");
-  const [selectedPokemon, selectedPokemonSet] = React.useState("");
-  const [pokemon, pokemonSet] = React.useState([]);
+  const [pokemon, pokemonSet] = React.useState(null);
+  const [selectedPokemon, selectedPokemonSet] = React.useState(null);
 
   const url =
     process.env.NEXT_PUBLIC_URL_POKEMON ||
@@ -48,6 +47,7 @@ export default function Home() {
     fetch(url)
       .then((resp) => resp.json())
       .then((data) => {
+        console.log("data", data);
         pokemonSet(data);
       });
   }, [url]);
@@ -70,7 +70,7 @@ export default function Home() {
             <PokemonFilter />
             <PokemonTable />
           </div>
-          {<PokemonInfo {...selectedPokemon} />}
+          {<PokemonInfo />}
         </TwoColumnLayout>
       </Container>
     </PokemonContext.Provider>
