@@ -6,65 +6,16 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { Button } from "@mui/material";
-
 import PropTypes from "prop-types";
 
 import styles from "../styles/Home.module.css";
 
 import styled from "@emotion/styled";
 
-const PokemonRow = ({ pokemon, onSelect }) => (
-  <tr key={pokemon.id}>
-    <td>{pokemon.name.english}</td>
-    <td>{pokemon.type.join(", ")}</td>
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={() => onSelect(pokemon)}
-    >
-      Select!
-    </Button>
-  </tr>
-);
-
-PokemonRow.propTypes = {
-  pokemon: PropTypes.shape({
-    name: PropTypes.shape({
-      english: PropTypes.string,
-    }),
-    type: PropTypes.arrayOf(PropTypes.string),
-    onSelect: PropTypes.func,
-  }),
-};
-
-const PokemonInfo = ({ name, base }) => (
-  <div>
-    <h1>{name.english}</h1>
-    <table>
-      {Object.keys(base).map((key) => (
-        <tr key={key}>
-          <td>{key}</td>
-          <td>{base[key]}</td>
-        </tr>
-      ))}
-    </table>
-  </div>
-);
-
-PokemonInfo.propTypes = {
-  name: PropTypes.shape({
-    english: PropTypes.string,
-  }),
-  base: PropTypes.shape({
-    HP: PropTypes.number.isRequired,
-    Attack: PropTypes.number.isRequired,
-    Defense: PropTypes.number.isRequired,
-    "Sp. Attack": PropTypes.number.isRequired,
-    "Sp. Defense": PropTypes.number.isRequired,
-    Speed: PropTypes.number.isRequired,
-  }),
-};
+import PokemonRow from "./components/PokemonRow";
+import PokemonInfo from "./components/PokemonInfo";
+import PokemonFilter from "./components/PokemonFilter";
+import PokemonTable from "./components/PokemonTable";
 
 const Title = styled.h1`
   text-align: center;
@@ -82,15 +33,9 @@ const Container = styled.div`
   paddingtop: 1rem;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  font-size: x-large;
-  padding: 0.2rem;
-`;
-
 export default function Home() {
   const [filter, filterSet] = React.useState("");
-  const [selectedItem, selectedItemSet] = React.useState("");
+  const [selectedPokemon, selectedPokemonSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState([]);
 
   const url =
@@ -108,39 +53,16 @@ export default function Home() {
   return (
     <Container>
       <Title>Pokemon Search</Title>
-      <Input
-        className={styles.search}
-        value={filter}
-        onChange={(event) => filterSet(event.target.value)}
-      />
       <TwoColumnLayout>
         <div>
-          <table width="100%">
-            <thead>
-              <tr>
-                <th className={styles.propertyName}>Name</th>
-                <th className={styles.propertyName}>Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pokemon
-                .filter((pokemon) =>
-                  pokemon.name.english
-                    .toLowerCase()
-                    .includes(filter.toLowerCase())
-                )
-                .slice(0, 20)
-                .map((pokemon) => (
-                  <PokemonRow
-                    pokemon={pokemon}
-                    key={pokemon.id}
-                    onSelect={(pokemon) => selectedItemSet(pokemon)}
-                  />
-                ))}
-            </tbody>
-          </table>
+          <PokemonFilter filter={filter} filterSet={filterSet} />
+          <PokemonTable
+            filter={filter}
+            pokemon={pokemon}
+            selectedPokemonSet={selectedPokemonSet}
+          />
         </div>
-        {selectedItem && <PokemonInfo {...selectedItem} />}
+        {selectedPokemon && <PokemonInfo {...selectedPokemon} />}
       </TwoColumnLayout>
     </Container>
   );
