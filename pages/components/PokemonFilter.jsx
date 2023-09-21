@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import styles from "../../styles/Home.module.css";
 import PokemonContext from "../../contexts/PokemonContext";
 
+import { ACTION } from "..";
+
 const Input = styled.input`
   width: 100%;
   font-size: x-large;
@@ -11,12 +13,20 @@ const Input = styled.input`
 `;
 
 const PokemonFilter = () => {
-  const { filter, filterSet } = useContext(PokemonContext);
+  const {
+    state: { filter },
+    dispatch,
+  } = useContext(PokemonContext);
   return (
     <Input
       className={styles.search}
       value={filter}
-      onChange={(event) => filterSet(event.target.value)}
+      onChange={(event) =>
+        dispatch({
+          type: ACTION.set_filter,
+          payload: event.target.value,
+        })
+      }
     />
   );
 };

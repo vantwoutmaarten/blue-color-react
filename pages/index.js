@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import "@fontsource/roboto/300.css";
@@ -34,10 +34,44 @@ const Container = styled.div`
   paddingtop: 1rem;
 `;
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTION.set_filter:
+      return {
+        ...state,
+        filter: action.payload,
+      };
+    case ACTION.set_pokemon:
+      return {
+        ...state,
+        pokemon: action.payload,
+      };
+    case ACTION.set_selected_pokemon:
+      return {
+        ...state,
+        selectedPokemon: action.payload,
+      };
+    default:
+      throw new Error("No action");
+  }
+};
+
+export const ACTION = {
+  set_filter: "SET_FILTER",
+  set_pokemon: "SET_POKEMON",
+  set_selected_pokemon: "SET_SELECTED_POKEMON",
+};
+
 export default function Home() {
   const [filter, filterSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState(null);
   const [selectedPokemon, selectedPokemonSet] = React.useState(null);
+
+  const [state, dispatch] = useReducer(reducer, {
+    pokemon: [],
+    filter: "",
+    selectedPokemon: null,
+  });
 
   const url =
     process.env.NEXT_PUBLIC_URL_POKEMON ||
@@ -47,7 +81,10 @@ export default function Home() {
     fetch(url)
       .then((resp) => resp.json())
       .then((data) => {
-        pokemonSet(data);
+        dispatch({
+          type: "SET_POKEMON",
+          payload: data,
+        });
       });
   }, [url]);
 
@@ -60,6 +97,8 @@ export default function Home() {
         filterSet,
         pokemonSet,
         selectedPokemonSet,
+        state,
+        dispatch,
       }}
     >
       <Container>
