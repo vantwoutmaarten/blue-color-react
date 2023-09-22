@@ -16,7 +16,8 @@ import PokemonInfo from "./components/PokemonInfo";
 import PokemonFilter from "./components/PokemonFilter";
 import PokemonTable from "./components/PokemonTable";
 
-import PokemonContext from "../contexts/PokemonContext";
+import { createStore } from "redux";
+import { Provider, useSelector, useDispatch } from "react-redux";
 
 const Title = styled.h1`
   text-align: center;
@@ -33,8 +34,20 @@ const Container = styled.div`
   width: 800px;
   paddingtop: 1rem;
 `;
+export const ACTION = {
+  set_filter: "SET_FILTER",
+  set_pokemon: "SET_POKEMON",
+  set_selected_pokemon: "SET_SELECTED_POKEMON",
+};
 
-const reducer = (state, action) => {
+const reducer = (
+  state = {
+    pokemon: [],
+    filter: "",
+    selectedPokemon: null,
+  },
+  action
+) => {
   switch (action.type) {
     case ACTION.set_filter:
       return {
@@ -52,22 +65,15 @@ const reducer = (state, action) => {
         selectedPokemon: action.payload,
       };
     default:
-      throw new Error("No action");
+      return state;
   }
 };
 
-export const ACTION = {
-  set_filter: "SET_FILTER",
-  set_pokemon: "SET_POKEMON",
-  set_selected_pokemon: "SET_SELECTED_POKEMON",
-};
+const store = createStore(reducer);
 
-export default function Home() {
-  const [state, dispatch] = useReducer(reducer, {
-    pokemon: [],
-    filter: "",
-    selectedPokemon: null,
-  });
+function Home() {
+  const dispatch = useDispatch();
+  const pokemon = useSelector((state) => state.pokemon);
 
   const url =
     process.env.NEXT_PUBLIC_URL_POKEMON ||
@@ -84,23 +90,28 @@ export default function Home() {
       });
   }, [url]);
 
+  if (!pokemon) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <PokemonContext.Provider
-      value={{
-        state,
-        dispatch,
-      }}
-    >
-      <Container>
-        <Title>Pokemon Search</Title>
-        <TwoColumnLayout>
-          <div>
-            <PokemonFilter />
-            <PokemonTable />
-          </div>
-          {<PokemonInfo />}
-        </TwoColumnLayout>
-      </Container>
-    </PokemonContext.Provider>
+    <Container>
+      <Title>Pokemon Search</Title>
+      <TwoColumnLayout>
+        <div>
+          <PokemonFilter />
+          <PokemonTable />
+        </div>
+        {<PokemonInfo />}
+      </TwoColumnLayout>
+    </Container>
   );
 }
+
+const ProvidedHome = () => (
+  <Provider store={store}>
+    <Home />
+  </Provider>
+);
+
+export default ProvidedHome;

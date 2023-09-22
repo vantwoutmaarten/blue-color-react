@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 
 import styles from "../../styles/Home.module.css";
-import PokemonContext from "../../contexts/PokemonContext";
 
 import { ACTION } from "..";
+
+import { useSelector, useDispatch } from "react-redux";
 
 const Input = styled.input`
   width: 100%;
@@ -13,7 +14,8 @@ const Input = styled.input`
 `;
 
 const PokemonFilter = () => {
-  const { state: { filter = "" } = {}, dispatch } = useContext(PokemonContext);
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.filter);
   return (
     <Input
       className={styles.search}

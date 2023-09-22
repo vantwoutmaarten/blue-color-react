@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import PokemonContext from "../../contexts/PokemonContext";
+
+import { useSelector } from "react-redux";
 
 const PokemonInfo = () => {
-  const { state: { selectedPokemon = null } = {} } = useContext(PokemonContext);
+  const selectedPokemon = useSelector((state) => state.selectedPokemon);
+
   return selectedPokemon ? (
     <div>
       <h1>{selectedPokemon?.name.english}</h1>
