@@ -63,10 +63,6 @@ export const ACTION = {
 };
 
 export default function Home() {
-  const [filter, filterSet] = React.useState("");
-  const [pokemon, pokemonSet] = React.useState(null);
-  const [selectedPokemon, selectedPokemonSet] = React.useState(null);
-
   const [state, dispatch] = useReducer(reducer, {
     pokemon: [],
     filter: "",
@@ -91,12 +87,6 @@ export default function Home() {
   return (
     <PokemonContext.Provider
       value={{
-        filter,
-        pokemon,
-        selectedPokemon,
-        filterSet,
-        pokemonSet,
-        selectedPokemonSet,
         state,
         dispatch,
       }}
