@@ -23,13 +23,13 @@ const PokemonTable = () => {
       <tbody>
         {pokemon
           ?.filter((pokemon) =>
-            pokemon.name.english.toLowerCase().includes(filter.toLowerCase())
+            pokemon?.name.english.toLowerCase().includes(filter?.toLowerCase())
           )
           .slice(0, 20)
           .map((pokemon) => (
             <PokemonRow
               pokemon={pokemon}
-              key={pokemon.id}
+              key={pokemon?.id}
               onSelect={(pokemon) =>
                 dispatch({
                   type: ACTION.set_selected_pokemon,
