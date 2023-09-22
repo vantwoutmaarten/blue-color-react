@@ -8,7 +8,7 @@ import PokemonContext from "../../contexts/PokemonContext";
 import { ACTION } from "..";
 
 const PokemonTable = () => {
-  const { state: { pokemon = {}, filter = "" } = {}, dispatch } =
+  const { state: { pokemon = [], filter = "" } = {}, dispatch } =
     useContext(PokemonContext);
   return (
     <table width="100%">
