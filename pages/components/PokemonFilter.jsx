@@ -13,10 +13,7 @@ const Input = styled.input`
 `;
 
 const PokemonFilter = () => {
-  const {
-    state: { filter },
-    dispatch,
-  } = useContext(PokemonContext);
+  const { state: { filter = "" } = {}, dispatch } = useContext(PokemonContext);
   return (
     <Input
       className={styles.search}
