@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 
-import { useSelector } from "react-redux";
+import useStore from "../store";
 
 const PokemonInfo = () => {
-  const selectedPokemon = useSelector((state) => state.selectedPokemon);
+  const selectedPokemon = useStore((state) => state.selectedPokemon);
 
   return selectedPokemon ? (
     <div>
@@ -20,19 +20,5 @@ const PokemonInfo = () => {
     </div>
   ) : null;
 };
-
-// PokemonInfo.propTypes = {
-//   name: PropTypes.shape({
-//     english: PropTypes.string,
-//   }),
-//   base: PropTypes.shape({
-//     HP: PropTypes.number.isRequired,
-//     Attack: PropTypes.number.isRequired,
-//     Defense: PropTypes.number.isRequired,
-//     "Sp. Attack": PropTypes.number.isRequired,
-//     "Sp. Defense": PropTypes.number.isRequired,
-//     Speed: PropTypes.number.isRequired,
-//   }),
-// };
 
 export default PokemonInfo;
