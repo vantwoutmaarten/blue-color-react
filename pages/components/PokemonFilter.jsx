@@ -5,7 +5,9 @@ import styles from "../../styles/Home.module.css";
 
 import { ACTION } from "..";
 
-import useStore from "../store";
+import store from "../store";
+
+import { observer } from "mobx-react";
 
 const Input = styled.input`
   width: 100%;
@@ -14,15 +16,13 @@ const Input = styled.input`
 `;
 
 const PokemonFilter = () => {
-  const setFilter = useStore((state) => state.setFilter);
-  const filter = useStore((state) => state.filter);
   return (
     <Input
       className={styles.search}
-      value={filter}
-      onChange={(event) => setFilter(event.target.value)}
+      value={store.filter}
+      onChange={(event) => store.setFilter(event.target.value)}
     />
   );
 };
 
-export default PokemonFilter;
+export default observer(PokemonFilter);
