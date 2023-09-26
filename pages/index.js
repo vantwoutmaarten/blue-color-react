@@ -1,4 +1,3 @@
-import React, { useReducer } from "react";
 import Image from "next/image";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -11,9 +10,9 @@ import styles from "../styles/Home.module.css";
 
 import styled from "@emotion/styled";
 
-import PokemonInfo from "./components/PokemonInfo";
-import PokemonFilter from "./components/PokemonFilter";
-import PokemonTable from "./components/PokemonTable";
+import PokemonInfo from "../components/PokemonInfo";
+import PokemonFilter from "../components/PokemonFilter";
+import PokemonTable from "../components/PokemonTable";
 
 const Title = styled.h1`
   text-align: center;
@@ -30,11 +29,6 @@ const Container = styled.div`
   width: 800px;
   paddingtop: 1rem;
 `;
-export const ACTION = {
-  set_filter: "SET_FILTER",
-  set_pokemon: "SET_POKEMON",
-  set_selected_pokemon: "SET_SELECTED_POKEMON",
-};
 
 function Home() {
   return (

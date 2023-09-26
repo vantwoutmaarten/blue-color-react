@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
 import styled from "@emotion/styled";
 
-import styles from "../../styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 
-import { ACTION } from "..";
-
-import store from "../store";
+import store from "../src/store";
 
 import { observer } from "mobx-react";
 

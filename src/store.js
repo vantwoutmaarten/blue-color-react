@@ -27,22 +27,18 @@ class Store {
   }
 
   get filteredPokemon() {
-    this.pokemon?.filter((pokemon) =>
-      this.pokemon?.name?.english
-        .toLowerCase()
-        .includes(this.filter?.toLowerCase())
+    return this.pokemon.filter((pokemon) =>
+      pokemon?.name?.english.toLowerCase().includes(this.filter?.toLowerCase())
     );
   }
 }
 
 const store = new Store();
 
-const url =
-  process.env.NEXT_PUBLIC_URL_POKEMON ||
-  "http://localhost:3000/blue-color-react/pokemon.json";
-
-fetch(url)
-  .then((resp) => resp.json())
-  .then((pokemon) => store.setPokemon(pokemon));
+if (typeof window !== "undefined") {
+  fetch("/blue-color-react/pokemon.json")
+    .then((resp) => resp.json())
+    .then((pokemon) => store.setPokemon(pokemon));
+}
 
 export default store;

@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
 
-import store from "../store";
+import store from "../src/store";
 
 import { observer } from "mobx-react";
 

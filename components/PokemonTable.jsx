@@ -1,14 +1,10 @@
-import React, { useContext } from "react";
-
 import PokemonRow from "./PokemonRow";
 
-import styles from "../../styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 
-import store from "../store";
+import store from "../src/store";
 
 import { observer } from "mobx-react";
-
-import { ACTION } from "..";
 
 const PokemonTable = () => {
   return (
@@ -20,10 +16,10 @@ const PokemonTable = () => {
         </tr>
       </thead>
       <tbody>
-        {store.filteredPokemon.slice(0, 20).map((pokemon) => (
+        {store.filteredPokemon?.slice(0, 20).map((pokemon) => (
           <PokemonRow
-            key={store.pokemon.id}
-            pokemon={store.pokemon}
+            key={pokemon.id}
+            pokemon={pokemon}
             onSelect={(pokemon) => store.setSelectedPokemon(pokemon)}
           />
         ))}
