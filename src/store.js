@@ -27,7 +27,7 @@ class Store {
   }
 
   get filteredPokemon() {
-    return this.pokemon.filter((pokemon) =>
+    return this.pokemon?.filter((pokemon) =>
       pokemon?.name?.english.toLowerCase().includes(this.filter?.toLowerCase())
     );
   }
@@ -35,10 +35,10 @@ class Store {
 
 const store = new Store();
 
-if (typeof window !== "undefined") {
-  fetch("/blue-color-react/pokemon.json")
-    .then((resp) => resp.json())
-    .then((pokemon) => store.setPokemon(pokemon));
-}
+// if (typeof window !== "undefined") {
+//   fetch("/blue-color-react/pokemon.json")
+//     .then((resp) => resp.json())
+//     .then((pokemon) => store.setPokemon(pokemon));
+// }
 
 export default store;

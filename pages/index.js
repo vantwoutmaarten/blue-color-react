@@ -14,6 +14,10 @@ import PokemonInfo from "../components/PokemonInfo";
 import PokemonFilter from "../components/PokemonFilter";
 import PokemonTable from "../components/PokemonTable";
 
+import store from "../src/store";
+
+import { observer } from "mobx-react";
+
 const Title = styled.h1`
   text-align: center;
 `;
@@ -30,7 +34,17 @@ const Container = styled.div`
   paddingtop: 1rem;
 `;
 
-function Home() {
+export async function getServerSideProps() {
+  const res = await fetch(
+    "http://localhost:3000/blue-color-react/pokemon.json"
+  );
+  const pokemon = await res.json();
+
+  return { props: { pokemon } };
+}
+
+function Home({ pokemon }) {
+  store.setPokemon(pokemon);
   return (
     <Container>
       <Title>Pokemon Search</Title>
@@ -45,4 +59,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default observer(Home);
