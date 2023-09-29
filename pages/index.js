@@ -34,17 +34,7 @@ const Container = styled.div`
   paddingtop: 1rem;
 `;
 
-export async function getServerSideProps() {
-  const res = await fetch(
-    "http://localhost:3000/blue-color-react/pokemon.json"
-  );
-  const pokemon = await res.json();
-
-  return { props: { pokemon } };
-}
-
-function Home({ pokemon }) {
-  store.setPokemon(pokemon);
+function Home() {
   return (
     <Container>
       <Title>Pokemon Search</Title>

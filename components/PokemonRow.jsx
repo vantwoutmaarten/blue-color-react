@@ -9,7 +9,7 @@ const PokemonRow = ({ pokemon, onSelect }) => (
   <>
     <tr>
       <td>
-        <Link href={`/pokemon/${pokemon.id}`}>{pokemon?.name?.english}</Link>
+        <Link href={`pokemon/${pokemon.id}`}>{pokemon?.name?.english}</Link>
       </td>
       <td>{pokemon?.type.join(", ")}</td>
       <td>

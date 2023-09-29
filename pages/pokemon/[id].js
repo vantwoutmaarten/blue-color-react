@@ -15,15 +15,22 @@ const Container = styled.div`
   width: 800px;
   paddingtop: 1rem;
 `;
+export async function getStaticPaths() {
+  const allPokemon = require("../../src/pokemon.json");
 
-export async function getServerSideProps(context) {
-  const res = await fetch(
-    "http://localhost:3000/blue-color-react/pokemon.json"
-  );
-  const allPokemon = await res.json();
+  return {
+    paths: allPokemon.map((pokemon) => ({
+      params: { id: pokemon.id.toString() },
+    })),
+    fallback: false, // false or "blocking"
+  };
+}
+
+export async function getStaticProps(context) {
+  const allPokemon = require("../../src/pokemon.json");
 
   const pokemon = allPokemon.find(
-    ({ id }) => id.toString() === context.query.id
+    ({ id }) => id.toString() === context.params.id
   );
 
   return { props: { pokemon } };
